@@ -46,12 +46,12 @@ namespace ReviewSiteTest {
         [TestMethod]
         public void AddReview() {
             var reviewGuid = Guid.NewGuid().ToString();
-            var rd = new ReviewDisplay("ReviewerName", "ReviewTitle", reviewGuid, 5, "");
-            var restid = 1;
+            var now = DateTime.Now;
 
-            session.AddReview(rd, restid);
-            var result = session.ViewReviews(restid).Single(r => r.Body == reviewGuid);
-            result.DatePublished = "";
+            var rd = new ReviewDisplay(1, 1, "ReviewerName", "ReviewTitle", reviewGuid, 5, now);
+
+            session.AddReview(rd);
+            var result = session.ViewReviews(1).Single(r => r.Body == reviewGuid);
 
             Assert.AreEqual(rd.ToString(), result.ToString());
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ReviewSiteData.Base.Model;
 using ReviewSiteLogic.Render;
@@ -16,7 +15,7 @@ namespace ReviewSiteLogic.Util {
         }
 
         public ReviewDisplay ToDisplay(Review r) {
-            return new ReviewDisplay(r.Name, r.Title, r.Body, r.Rating, r.DatePublished.ToShortDateString());
+            return new ReviewDisplay(r.Id, r.RestaurantId, r.Name, r.Title, r.Body, r.Rating, r.DatePublished);
         }
 
         public List<RestaurantDisplay> ToDisplay(IEnumerable<Restaurant> r) {
@@ -33,15 +32,40 @@ namespace ReviewSiteLogic.Util {
             return reviews;
         }
 
-        public Review ToModel(ReviewDisplay r, int restaurantId) {
+        public Restaurant ToModel(RestaurantDisplay r) {
+            List<Review> convertedReviews = new List<Review>();
+            foreach (var review in r.Reviews) {
+                convertedReviews.Add(ToModel(review));
+            }
+
+            return new Restaurant() {
+                Name = r.Name,
+                Address = r.Address,
+                Phone = r.Phone,
+                Reviews = convertedReviews,
+                Id = r.Id
+            };
+        }
+
+        public Review ToModel(ReviewDisplay r) {
             return new Review() {
                 Rating = r.Rating,
                 Body = r.Body,
                 Name = r.ReviewerName,
                 Title = r.Title,
-                RestaurantId = restaurantId,
-                DatePublished = DateTime.Now
+                Id = r.Id,
+                RestaurantId = r.RestaurantId,
+                DatePublished = r.DatePublished
             };
+        }
+
+        public List<Review> ToModel(IEnumerable<ReviewDisplay> r) {
+            var reviews = new List<Review>();
+            foreach (var review in r) {
+                reviews.Add(ToModel(review));
+            }
+
+            return reviews;
         }
     }
 

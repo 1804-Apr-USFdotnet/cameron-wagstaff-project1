@@ -93,8 +93,8 @@ namespace ReviewSiteTest {
 
             var result = dsc.ToDisplay(r);
 
-            Assert.AreEqual("Anonymous", result.ReviewerName);
-            Assert.AreEqual(now.ToShortDateString(), result.DatePublished);
+            Assert.AreEqual(r.Name, result.ReviewerName);
+            Assert.AreEqual(r.DatePublished, result.DatePublished);
             Assert.AreEqual(r.Rating, result.Rating);
             Assert.AreEqual(r.Title, result.Title);
             Assert.AreEqual(r.Body, result.Body);
@@ -115,7 +115,7 @@ namespace ReviewSiteTest {
             var result = dsc.ToDisplay(r);
 
             Assert.AreEqual(r.Name, result.ReviewerName);
-            Assert.AreEqual(now.ToShortDateString(), result.DatePublished);
+            Assert.AreEqual(r.DatePublished, result.DatePublished);
             Assert.AreEqual(r.Rating, result.Rating);
             Assert.AreEqual(r.Title, result.Title);
             Assert.AreEqual(r.Body, result.Body);

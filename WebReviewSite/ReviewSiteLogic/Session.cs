@@ -39,7 +39,6 @@ namespace ReviewSiteLogic {
 
         public List<RestaurantDisplay> ViewRestaurantsSortedNameDesc() {
             return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedName(true));
-
         }
 
         public List<RestaurantDisplay> ViewRestaurantsSortedRatingAsc() {
@@ -48,7 +47,6 @@ namespace ReviewSiteLogic {
 
         public List<RestaurantDisplay> ViewRestaurantsSortedRatingDesc() {
             return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedRating(true));
-
         }
 
         public List<RestaurantDisplay> SearchRestaurants(string term) {
@@ -79,9 +77,53 @@ namespace ReviewSiteLogic {
             return dsp.ToDisplay(_workUnit.Reviews.GetReviews(id));
         }
 
-        public void AddReview(ReviewDisplay rd, int restId) {
+        public void AddRestaurant(RestaurantDisplay rd) {
             try {
-                _workUnit.Reviews.Add(dsp.ToModel(rd, restId));
+                _workUnit.Restaurants.Add(dsp.ToModel(rd));
+                if (rd.Reviews != null) {
+                    _workUnit.Reviews.Add(dsp.ToModel(rd.Reviews));
+                }
+                _workUnit.SaveChanges();
+            }
+            catch (Exception e) {
+                logger.Error(e.Message);
+            }
+        }
+
+        public void AddReview(ReviewDisplay rd) {
+            try {
+                _workUnit.Reviews.Add(dsp.ToModel(rd));
+                _workUnit.SaveChanges();
+            }
+            catch (Exception e) {
+                logger.Error(e.Message);
+            }
+        }
+
+        public void UpdateRestaurant(RestaurantDisplay rd) {
+            DeleteRestaurant(rd.Id);
+            AddRestaurant(rd);
+        }
+
+        public void UpdateReview(ReviewDisplay rd) {
+            DeleteReview(rd.Id);
+            AddReview(rd);
+        }
+
+        public void DeleteRestaurant(int restId) {
+            try {
+                _workUnit.Restaurants.Remove(_workUnit.Restaurants.Get(restId));
+                _workUnit.Reviews.Remove(_workUnit.Reviews.GetReviews(restId));
+                _workUnit.SaveChanges();
+            }
+            catch (Exception e) {
+                logger.Error(e.Message);
+            }
+        }
+
+        public void DeleteReview(int reviewId) {
+            try {
+                _workUnit.Reviews.Remove(_workUnit.Reviews.Get(reviewId));
                 _workUnit.SaveChanges();
             }
             catch (Exception e) {
