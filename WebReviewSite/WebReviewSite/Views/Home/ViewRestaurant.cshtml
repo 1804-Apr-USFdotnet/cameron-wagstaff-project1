@@ -5,23 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ViewRestaurant</h2>
-
 <div>
-    <h4>RestaurantDisplay</h4>
+    <h2>@Html.DisplayFor(model => model.Name)</h2>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
+        <d>
             @Html.DisplayNameFor(model => model.Address)
-        </dt>
+        </d>
 
         <dd>
             @Html.DisplayFor(model => model.Address)
@@ -45,31 +35,23 @@
 
     </dl>
 </div>
-<div>
-    <table class="table">
-        @foreach (var review in Model.Reviews)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(r => review.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(r => review.Rating)
-            </td>
-            <td>
-                @Html.DisplayFor(r => review.Body)
-            </td>
-            <td>
-                @Html.DisplayFor(r => review.ReviewerName)
-            </td>
-            <td>
-                @Html.DisplayFor(r => review.DatePublished)
-            </td>
-        </tr>
-        }
-    </table>
+<hr/>
+<h3>Reviews</h3>
+<div class="row">
+
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="col-md-3 well well-sm">
+            @Html.DisplayFor(modelItem => review.Title)<br />
+            @Html.DisplayFor(modelItem => review.Rating) / 10<br />
+            @Html.DisplayFor(modelItem => review.Body)<br />
+            @Html.DisplayFor(modelItem => review.ReviewerName)<br />
+            @Html.DisplayFor(modelItem => review.DatePublished)<br />
+        </div>
+        <div class="col-md-1"></div>
+    }
 </div>
+<hr/>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "ListRestaurants")
 </p>

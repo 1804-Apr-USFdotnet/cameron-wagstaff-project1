@@ -10,43 +10,16 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "ViewRestaurant", new {id=item.Id}) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    @foreach (var item in Model) {
+        <div class="col-md-3 well well-sm">
+            @Html.DisplayFor(modelItem => item.Name)<br/>
+            @Html.DisplayFor(modelItem => item.Rating)<br/>
+            @Html.DisplayFor(modelItem => item.Address)<br />
+            @Html.DisplayFor(modelItem => item.Phone)<br />
+            @Html.ActionLink("Details", "ViewRestaurant", new {id = item.Id})
+        </div>
+        <div class="col-md-1"></div>
+    }
+</div>

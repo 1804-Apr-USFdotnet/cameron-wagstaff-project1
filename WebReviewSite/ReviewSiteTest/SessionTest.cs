@@ -53,6 +53,8 @@ namespace ReviewSiteTest {
             session.AddReview(rd);
             var result = session.ViewReviews(1).Single(r => r.Body == reviewGuid);
 
+            session.DeleteReview(result.Id);
+
             Assert.AreEqual(rd.ToString(), result.ToString());
         }
     }
