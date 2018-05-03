@@ -1,0 +1,75 @@
+﻿@model ReviewSiteLogic.Render.RestaurantDisplay
+
+@{
+    ViewBag.Title = "ViewRestaurant";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewRestaurant</h2>
+
+<div>
+    <h4>RestaurantDisplay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <table class="table">
+        @foreach (var review in Model.Reviews)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(r => review.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(r => review.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(r => review.Body)
+            </td>
+            <td>
+                @Html.DisplayFor(r => review.ReviewerName)
+            </td>
+            <td>
+                @Html.DisplayFor(r => review.DatePublished)
+            </td>
+        </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ListRestaurants")
+</p>

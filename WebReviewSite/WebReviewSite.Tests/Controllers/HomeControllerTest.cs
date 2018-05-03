@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ReviewSiteLogic;
 using WebReviewSite;
 using WebReviewSite.Controllers;
 
