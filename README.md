@@ -1,7 +1,5 @@
 # cameron-wagstaff-project1
 
-# cameron-wagstaff-project1
-
 # project 1: restaurant review application
 April 2018 .NET / Pushpinder Kaur, Nick Escalona
 
