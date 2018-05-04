@@ -7,11 +7,16 @@ namespace ReviewSiteLogic.Util {
 
     public class DisplayConverter {
         public RestaurantDisplay ToDisplay(Restaurant r) {
-            var rDisplay =
-                new RestaurantDisplay(r.Id, r.Name, r.Address, r.Phone, r.Rating()) {
-                    Reviews = ToDisplay(r.Reviews.ToList())
+            if (r.Reviews != null) {
+                return new RestaurantDisplay(r.Id, r.Name, r.Address, r.Phone, r.Rating()) {
+                        Reviews = ToDisplay(r.Reviews.ToList())
+                    };
+            }
+            else {
+                return new RestaurantDisplay(r.Id, r.Name, r.Address, r.Phone, r.Rating()) {
+                    Reviews = new List<ReviewDisplay>()
                 };
-            return rDisplay;
+            }
         }
 
         public ReviewDisplay ToDisplay(Review r) {
@@ -34,10 +39,13 @@ namespace ReviewSiteLogic.Util {
 
         public Restaurant ToModel(RestaurantDisplay r) {
             List<Review> convertedReviews = new List<Review>();
-            foreach (var review in r.Reviews) {
-                convertedReviews.Add(ToModel(review));
-            }
 
+            if (r.Reviews != null ) {
+                foreach (var review in r.Reviews) {
+                    convertedReviews.Add(ToModel(review));
+                }
+            }
+            
             return new Restaurant() {
                 Name = r.Name,
                 Address = r.Address,

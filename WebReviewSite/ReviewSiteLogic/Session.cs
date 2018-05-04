@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NLog;
 using ReviewSiteData;
 using ReviewSiteData.Persistence;
@@ -26,7 +27,9 @@ namespace ReviewSiteLogic {
         }
 
         public List<RestaurantDisplay> ViewTopRestaurants() {
-            return dsp.ToDisplay(_workUnit.Restaurants.GetTopRestaurants(3));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviews());
+
+            return rests.OrderByDescending(r => r.Rating).Take(3).ToList();
         }
 
         public List<RestaurantDisplay> ViewRestaurants() {
@@ -34,19 +37,27 @@ namespace ReviewSiteLogic {
         }
 
         public List<RestaurantDisplay> ViewRestaurantsSortedNameAsc() {
-            return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedName(false));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviews());
+
+            return rests.OrderBy(r => r.Name).ToList();
         }
 
         public List<RestaurantDisplay> ViewRestaurantsSortedNameDesc() {
-            return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedName(true));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviews());
+
+            return rests.OrderByDescending(r => r.Name).ToList();
         }
 
         public List<RestaurantDisplay> ViewRestaurantsSortedRatingAsc() {
-            return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedRating(false));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviews());
+
+            return rests.OrderBy(r => r.Rating).ToList();
         }
 
         public List<RestaurantDisplay> ViewRestaurantsSortedRatingDesc() {
-            return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviewsSortedRating(true));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantsReviews());
+
+            return rests.OrderByDescending(r => r.Rating).ToList();
         }
 
         public List<RestaurantDisplay> SearchRestaurants(string term) {
@@ -54,19 +65,27 @@ namespace ReviewSiteLogic {
         }
 
         public List<RestaurantDisplay> SearchRestaurantsSortedNameAsc(string term) {
-            return dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurantsSortedName(term, false));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurants(term));
+
+            return rests.OrderBy(r => r.Name).ToList();
         }
 
         public List<RestaurantDisplay> SearchRestaurantsSortedNameDesc(string term) {
-            return dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurantsSortedName(term, true));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurants(term));
+
+            return rests.OrderByDescending(r => r.Name).ToList();
         }
 
         public List<RestaurantDisplay> SearchRestaurantsSortedRatingAsc(string term) {
-            return dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurantsSortedRating(term, false));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurants(term));
+
+            return rests.OrderBy(r => r.Rating).ToList();
         }
 
         public List<RestaurantDisplay> SearchRestaurantsSortedRatingDesc(string term) {
-            return dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurantsSortedRating(term, true));
+            var rests = dsp.ToDisplay(_workUnit.Restaurants.SearchRestaurants(term));
+
+            return rests.OrderByDescending(r => r.Rating).ToList();
         }
 
         public RestaurantDisplay ViewRestaurant(int id) {

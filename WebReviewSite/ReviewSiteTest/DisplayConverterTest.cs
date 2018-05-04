@@ -77,6 +77,24 @@ namespace ReviewSiteTest {
                 Phone = "9876543210",
                 Reviews = new List<Review>(reviews.GetRange(2, 2))
             });
+
+            restaurants.Add(new Restaurant() {
+                Address = "123 empty boi",
+                Id = 4,
+                Name = "emptytest",
+                Phone = "12345321"
+            });
+        }
+
+        [TestMethod]
+        public void RestaurantToDisplayNoReviews() {
+            var result = dsc.ToDisplay(restaurants[2]);
+            var expected = restaurants[2];
+
+            Assert.AreEqual(expected.Id, result.Id);
+            Assert.AreEqual(expected.Name, result.Name);
+            Assert.AreEqual(expected.Address, result.Address);
+            Assert.AreEqual(expected.Phone, result.Phone);
         }
 
         [TestMethod]

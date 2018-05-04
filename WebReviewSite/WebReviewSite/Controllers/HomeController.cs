@@ -21,8 +21,54 @@ namespace WebReviewSite.Controllers
         }
 
         public ActionResult ListRestaurants() {
-            var restaurantList = _session.ViewRestaurantsSortedRatingDesc();
+            var restaurantList = _session.ViewRestaurants();
             return View(restaurantList);
+        }
+
+        [HttpGet]
+        public ActionResult ListRestaurants(string q, string sortBy) {
+            if (sortBy == null) {
+                if (q == null) {
+                    return View(_session.ViewRestaurants());
+                }
+                else {
+                    return View(_session.SearchRestaurants(q));
+                }
+            }
+            else {
+                if(q == null)
+                {
+                    if (sortBy == "rd") {
+                        return View(_session.ViewRestaurantsSortedRatingDesc());
+                    }
+                    if (sortBy == "ra") {
+                        return View(_session.ViewRestaurantsSortedRatingAsc());
+                    }
+                    if (sortBy == "na") {
+                        return View(_session.ViewRestaurantsSortedNameAsc());
+                    }
+                    if (sortBy == "nd") {
+                        return View(_session.ViewRestaurantsSortedNameDesc());
+                    }
+                }
+                else {
+                    if (sortBy == "rd") {
+                        return View(_session.SearchRestaurantsSortedRatingDesc(q));
+                    }
+                    if (sortBy == "ra") {
+                        return View(_session.SearchRestaurantsSortedRatingAsc(q));
+                    }
+                    if (sortBy == "na") {
+                        return View(_session.SearchRestaurantsSortedNameAsc(q));
+                    }
+                    if (sortBy == "nd") {
+                        return View(_session.SearchRestaurantsSortedNameDesc(q));
+                    }
+                }
+                
+            }
+
+            return View(_session.ViewRestaurants());
         }
 
         public ActionResult ViewRestaurant(int id) {
@@ -37,11 +83,13 @@ namespace WebReviewSite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateRestaurant(RestaurantDisplay rd) {
+
             _session.AddRestaurant(rd);
             return Redirect("/");
         }
-
+        
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -5,17 +5,41 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Restaurants</h2>
+<div class="d-flex p-2 flex-row">
+    <div class="h2 p-2">
+        Restaurants
+    </div>
+    <div class="p-2">
+        @Html.ActionLink("Create New", "CreateRestaurant", null, new { @class = "btn btn-outline-primary" })
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "CreateRestaurant")
-</p>
+    <div class="dropdown p-2">
+        <button class="btn btn-outline-secondary dropdown-toggle" id="sortdropdown" type="button" data-toggle="dropdown" aria-haspopup="true">
+            Sort
+        </button>
+        <div class="dropdown-menu" aria-labeledby="sortdropdown">
+            <div class="dropdown-item">
+                @Html.ActionLink("Rating High - Low", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "rd"})
+            </div>
+            <div class="dropdown-item">
+                @Html.ActionLink("Rating Low - High", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "ra" })
+            </div>
+            <div class="dropdown-item">
+                @Html.ActionLink("Name A - Z", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "na" })
+            </div>
+            <div class="dropdown-item">
+                @Html.ActionLink("Name Z - A", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "nd" })
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
 
         @foreach (var restaurant in Model)
         {
-            <div class="col-md-3 card">
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-2 mx-2 card">
                 <div class="card-body">
                     <h3 class="card-title">@Html.DisplayFor(modelItem => restaurant.Name)</h3>
                     <h4 class="card-subtitle">@restaurant.Rating.ToString("N1") / 10</h4>
@@ -23,10 +47,11 @@
                         @Html.DisplayFor(modelItem => restaurant.Address)<br />
                         @Html.DisplayFor(modelItem => restaurant.Phone)<br />
                     </div>
-                    <a href="/Home/ViewRestaurant/@restaurant.Id" class="btn btn-outline-primary">Details & Reviews</a>
+                    <div class="card-footer">
+                        @Html.ActionLink("Details", "ViewRestaurant", new { id = restaurant.Id }, new { @class = "btn btn-outline-primary" })
+                    </div>
                 </div>
             </div>
-            <div class="col-md-1"></div>
         }
     </div>
 </div>

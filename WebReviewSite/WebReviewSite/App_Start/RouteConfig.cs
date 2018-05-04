@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Services.Protocols;
 
 namespace WebReviewSite
 {
@@ -18,6 +19,12 @@ namespace WebReviewSite
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Search",
+                url: "{controller}/{action}/{q}/{sortBy}",
+                defaults: new { controller = "Home", action = "ListRestaurants", q = UrlParameter.Optional, sortBy = UrlParameter.Optional}
+                );
         }
     }
 }

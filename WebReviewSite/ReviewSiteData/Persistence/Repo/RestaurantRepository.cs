@@ -28,42 +28,6 @@ namespace ReviewSiteData.Persistence.Repo {
             return ReviewSiteContext.Restaurants.Where(rest => rest.Name.Contains(term) || rest.Address.Contains(term))
                 .ToList();
         }
-
-        public IEnumerable<Restaurant> SearchRestaurantsSortedName(string term, bool desc) {
-            if (desc) {
-                return SearchRestaurants(term).OrderByDescending(rest => rest.Name);
-            }
-            else {
-                return SearchRestaurants(term).OrderBy(rest => rest.Name);
-            }
-        }
-
-        public IEnumerable<Restaurant> SearchRestaurantsSortedRating(string term, bool desc) {
-            if (desc) {
-                return SearchRestaurants(term).OrderByDescending(rest => rest.Reviews.Average(rev => rev.Rating));
-            }
-            else {
-                return SearchRestaurants(term).OrderBy(rest => rest.Reviews.Average(rev => rev.Rating));
-            }
-        }
-
-        public IEnumerable<Restaurant> GetRestaurantsReviewsSortedName(bool desc) {
-            if (desc) {
-                return GetRestaurantsReviews().OrderByDescending(rest => rest.Name);
-            }
-            else {
-                return GetRestaurantsReviews().OrderBy(rest => rest.Name);
-            }
-        }
-
-        public IEnumerable<Restaurant> GetRestaurantsReviewsSortedRating(bool desc) {
-            if (desc) {
-                return GetRestaurantsReviews().OrderByDescending(rest => rest.Reviews.Average(rev => rev.Rating));
-            }
-            else {
-                return GetRestaurantsReviews().OrderBy(rest => rest.Reviews.Average(rev => rev.Rating));
-            }
-        }
     }
 
 }

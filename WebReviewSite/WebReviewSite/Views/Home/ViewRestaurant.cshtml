@@ -7,11 +7,11 @@
 
 <div>
     <h2>@Html.DisplayFor(model => model.Name)</h2>
-    <hr/>
+    <hr />
     <dl class="dl-horizontal">
-        <d>
+        <dt>
             @Html.DisplayNameFor(model => model.Address)
-        </d>
+        </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Address)
@@ -35,12 +35,16 @@
 
     </dl>
 </div>
-<hr/>
-<h3>Reviews</h3>
-<div class="row">
+<hr />
+<div>
+    <h3>Reviews</h3>
+    @Html.ActionLink("Add Your Review", "CreateReview", new { id = Model.Id }, new { @class = "btn btn-outline-primary" })
+</div>
+<div class="card-columns">
 
-    @foreach (var review in Model.Reviews) {
-        <div class="col-md-3 card">
+    @foreach (var review in Model.Reviews)
+    {
+        <div class="card mx-2 my-2">
             <div class="card-body">
                 <h4 class="card-title">
                     @Html.DisplayFor(modelItem => review.Title)
@@ -58,10 +62,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1"></div>
     }
 </div>
-<hr/>
+<hr />
 <p>
     @Html.ActionLink("Back to List", "ListRestaurants")
 </p>

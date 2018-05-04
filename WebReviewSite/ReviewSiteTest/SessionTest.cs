@@ -40,7 +40,6 @@ namespace ReviewSiteTest {
             var result = session.ViewRestaurants();
 
             Assert.IsInstanceOfType(result, typeof(List<RestaurantDisplay>));
-            Assert.AreEqual(25, result.Count);
         }
 
         [TestMethod]
