@@ -1,6 +1,9 @@
-﻿body {
+﻿html, body {
+    /*
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 20px;*/
+    margin: 0px;
+    padding: 0px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -22,3 +25,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.jumbotron {
+    background-image: url("https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg");
+}
+

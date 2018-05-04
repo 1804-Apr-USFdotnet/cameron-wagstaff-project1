@@ -4,24 +4,30 @@
 }
 
 <div class="jumbotron">
-    <div>
-        <span class="h1">GudYelp</span><br/>
-        <span class="lead">Your source for discovering great Restaurants.</span>
-        <br/>
-        <span><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></span>
+    <div class="row">
+        <div class="col-sm-4 card">
+            <div class="card-body">
+                <h2 class="card-title">Your source for discovering great Restaurants.</h2>
+                <a href="/Home/ListRestaurants" class="btn btn-outline-primary btn-lg">Dive in &raquo;</a>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <h2>Top 3 Restaurants</h2>
 <div class="row container">
-    @foreach (var restaurant in Model)
-    {
-        <div class="col-md-3 well well-sm">
-            @Html.DisplayFor(modelItem => restaurant.Name)<br />
-            @Html.DisplayFor(modelItem => restaurant.Rating)<br />
-            @Html.DisplayFor(modelItem => restaurant.Address)<br />
-            @Html.DisplayFor(modelItem => restaurant.Phone)<br />
-            @Html.ActionLink("Details", "ViewRestaurant", new { id = restaurant.Id })
+    @foreach (var restaurant in Model) {
+        <div class="col-md-3 card">
+            <div class="card-body">
+
+                <h3 class="card-title">@Html.DisplayFor(modelItem => restaurant.Name)</h3>
+                <h4 class="card-text">@restaurant.Rating.ToString("N1") / 10</h4>
+                <!--
+                @Html.DisplayFor(modelItem => restaurant.Address)<br/>
+                @Html.DisplayFor(modelItem => restaurant.Phone)<br/> -->
+                <a href="/Home/ViewRestaurant/@restaurant.Id" class="btn btn-outline-primary">Details & Reviews</a>
+            </div>
         </div>
         <div class="col-md-1"></div>
     }

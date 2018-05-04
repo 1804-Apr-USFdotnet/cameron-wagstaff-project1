@@ -7,7 +7,7 @@
 
 <div>
     <h2>@Html.DisplayFor(model => model.Name)</h2>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <d>
             @Html.DisplayNameFor(model => model.Address)
@@ -39,14 +39,24 @@
 <h3>Reviews</h3>
 <div class="row">
 
-    @foreach (var review in Model.Reviews)
-    {
-        <div class="col-md-3 well well-sm">
-            @Html.DisplayFor(modelItem => review.Title)<br />
-            @Html.DisplayFor(modelItem => review.Rating) / 10<br />
-            @Html.DisplayFor(modelItem => review.Body)<br />
-            @Html.DisplayFor(modelItem => review.ReviewerName)<br />
-            @Html.DisplayFor(modelItem => review.DatePublished)<br />
+    @foreach (var review in Model.Reviews) {
+        <div class="col-md-3 card">
+            <div class="card-body">
+                <h4 class="card-title">
+                    @Html.DisplayFor(modelItem => review.Title)
+                </h4>
+                <h5 class="card-subtitle">
+                    @Html.DisplayFor(modelItem => review.Rating) / 10
+                </h5>
+                <div class="card-text">
+                    @Html.DisplayFor(modelItem => review.Body)
+                </div>
+                <div class="card-footer text-muted">
+                    @Html.DisplayFor(modelItem => review.ReviewerName)
+                    on
+                    @review.DatePublished.ToShortDateString()
+                </div>
+            </div>
         </div>
         <div class="col-md-1"></div>
     }

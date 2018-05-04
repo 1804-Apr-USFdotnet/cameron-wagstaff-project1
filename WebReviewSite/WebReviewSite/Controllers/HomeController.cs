@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ReviewSiteLogic;
 using System.Web.Mvc;
+using ReviewSiteLogic.Render;
 
 namespace WebReviewSite.Controllers
 {
@@ -27,6 +28,18 @@ namespace WebReviewSite.Controllers
         public ActionResult ViewRestaurant(int id) {
             var restaurant = _session.ViewRestaurant(id);
             return View(restaurant);
+        }
+
+        [HttpGet]
+        public ActionResult CreateRestaurant() {
+            var rd = new RestaurantDisplay();
+            return View(rd);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRestaurant(RestaurantDisplay rd) {
+            _session.AddRestaurant(rd);
+            return Redirect("/");
         }
 
         public ActionResult About()

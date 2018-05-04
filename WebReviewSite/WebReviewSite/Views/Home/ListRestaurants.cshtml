@@ -8,18 +8,25 @@
 <h2>Restaurants</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateRestaurant")
 </p>
-<div class="row">
+<div class="container-fluid">
+    <div class="row">
 
-    @foreach (var item in Model) {
-        <div class="col-md-3 well well-sm">
-            @Html.DisplayFor(modelItem => item.Name)<br/>
-            @Html.DisplayFor(modelItem => item.Rating)<br/>
-            @Html.DisplayFor(modelItem => item.Address)<br />
-            @Html.DisplayFor(modelItem => item.Phone)<br />
-            @Html.ActionLink("Details", "ViewRestaurant", new {id = item.Id})
-        </div>
-        <div class="col-md-1"></div>
-    }
+        @foreach (var restaurant in Model)
+        {
+            <div class="col-md-3 card">
+                <div class="card-body">
+                    <h3 class="card-title">@Html.DisplayFor(modelItem => restaurant.Name)</h3>
+                    <h4 class="card-subtitle">@restaurant.Rating.ToString("N1") / 10</h4>
+                    <div class="card-text">
+                        @Html.DisplayFor(modelItem => restaurant.Address)<br />
+                        @Html.DisplayFor(modelItem => restaurant.Phone)<br />
+                    </div>
+                    <a href="/Home/ViewRestaurant/@restaurant.Id" class="btn btn-outline-primary">Details & Reviews</a>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        }
+    </div>
 </div>
