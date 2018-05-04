@@ -244,11 +244,13 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\EditReview.cshtml" />
+    <Content Include="Views\Home\ManageRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\ContentView\" />
+    <Folder Include="Views\Edit\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -11,6 +11,10 @@ namespace ReviewSiteLogic.Render {
         public int Rating { get; set; }
         public DateTime DatePublished { get; set; }
 
+        public ReviewDisplay() {
+            DatePublished = DateTime.Now;
+        }
+
         public ReviewDisplay(int id, int restaurantId, string reviewer, string title, string body, int rating, DateTime published) {
             Id = id;
             RestaurantId = restaurantId;

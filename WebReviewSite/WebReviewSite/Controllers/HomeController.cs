@@ -26,8 +26,8 @@ namespace WebReviewSite.Controllers
         }
 
         [HttpGet]
-        public ActionResult ListRestaurants(string q, string sortBy) {
-            if (sortBy == null) {
+        public ActionResult ListRestaurants(string q, string sort) {
+            if (sort == null) {
                 if (q == null) {
                     return View(_session.ViewRestaurants());
                 }
@@ -38,30 +38,30 @@ namespace WebReviewSite.Controllers
             else {
                 if(q == null)
                 {
-                    if (sortBy == "rd") {
+                    if (sort == "rd") {
                         return View(_session.ViewRestaurantsSortedRatingDesc());
                     }
-                    if (sortBy == "ra") {
+                    if (sort == "ra") {
                         return View(_session.ViewRestaurantsSortedRatingAsc());
                     }
-                    if (sortBy == "na") {
+                    if (sort == "na") {
                         return View(_session.ViewRestaurantsSortedNameAsc());
                     }
-                    if (sortBy == "nd") {
+                    if (sort == "nd") {
                         return View(_session.ViewRestaurantsSortedNameDesc());
                     }
                 }
                 else {
-                    if (sortBy == "rd") {
+                    if (sort == "rd") {
                         return View(_session.SearchRestaurantsSortedRatingDesc(q));
                     }
-                    if (sortBy == "ra") {
+                    if (sort == "ra") {
                         return View(_session.SearchRestaurantsSortedRatingAsc(q));
                     }
-                    if (sortBy == "na") {
+                    if (sort == "na") {
                         return View(_session.SearchRestaurantsSortedNameAsc(q));
                     }
-                    if (sortBy == "nd") {
+                    if (sort == "nd") {
                         return View(_session.SearchRestaurantsSortedNameDesc(q));
                     }
                 }
@@ -88,6 +88,21 @@ namespace WebReviewSite.Controllers
 
             _session.AddRestaurant(rd);
             return Redirect("/");
+        }
+
+        [HttpGet]
+        public ActionResult CreateReview(int id) {
+            return View(new ReviewDisplay(){ RestaurantId = id });
+        }
+
+        [HttpPost]
+        public ActionResult CreateReview(ReviewDisplay rd) {
+            _session.AddReview(rd);
+            return Redirect($"/Home/ViewRestaurant/{rd.RestaurantId}");
+        }
+        
+        public ActionResult ManageRestaurant(int id) {
+            return View(_session.ViewRestaurant(id));
         }
         
         public ActionResult About()

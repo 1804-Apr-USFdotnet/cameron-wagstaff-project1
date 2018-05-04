@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="d-flex p-2 flex-row">
+<div class="d-flex flex-row">
     <div class="h2 p-2">
         Restaurants
     </div>
@@ -19,16 +19,16 @@
         </button>
         <div class="dropdown-menu" aria-labeledby="sortdropdown">
             <div class="dropdown-item">
-                @Html.ActionLink("Rating High - Low", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "rd"})
+                @Html.ActionLink("Rating High - Low", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sort = "rd"})
             </div>
             <div class="dropdown-item">
-                @Html.ActionLink("Rating Low - High", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "ra" })
+                @Html.ActionLink("Rating Low - High", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sort = "ra" })
             </div>
             <div class="dropdown-item">
-                @Html.ActionLink("Name A - Z", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "na" })
+                @Html.ActionLink("Name A - Z", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sort = "na" })
             </div>
             <div class="dropdown-item">
-                @Html.ActionLink("Name Z - A", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sortBy = "nd" })
+                @Html.ActionLink("Name Z - A", "ListRestaurants", new { q = HttpContext.Current.Request["q"], sort = "nd" })
             </div>
         </div>
     </div>
