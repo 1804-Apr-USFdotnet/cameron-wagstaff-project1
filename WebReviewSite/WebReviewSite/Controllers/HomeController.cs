@@ -105,6 +105,28 @@ namespace WebReviewSite.Controllers
             return View(_session.ViewRestaurant(id));
         }
 
+        [HttpGet]
+        public ActionResult EditRestaurant(int id) {
+            return View(_session.ViewRestaurant(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditRestaurant(RestaurantDisplay rd) {
+            _session.UpdateRestaurant(rd);
+            return Redirect("/Home/ListRestaurants");
+        }
+
+        [HttpGet]
+        public ActionResult EditReview(int id) {
+            return View(_session.GetReview(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditReview(ReviewDisplay rd) {
+            _session.UpdateReview(rd);
+            return Redirect($"/Home/ManageRestaurant/{rd.RestaurantId}");
+        }
+
         public ActionResult DeleteRestaurant(int id) {
             _session.DeleteRestaurant(id);
             return Redirect("/Home/ListRestaurants");

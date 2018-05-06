@@ -92,6 +92,10 @@ namespace ReviewSiteLogic {
             return dsp.ToDisplay(_workUnit.Restaurants.GetRestaurantReviews(id));
         }
 
+        public ReviewDisplay GetReview(int id) {
+            return dsp.ToDisplay(_workUnit.Reviews.Get(id));
+        }
+
         public List<ReviewDisplay> ViewReviews(int id) {
             return dsp.ToDisplay(_workUnit.Reviews.GetReviews(id));
         }
@@ -120,13 +124,25 @@ namespace ReviewSiteLogic {
         }
 
         public void UpdateRestaurant(RestaurantDisplay rd) {
-            DeleteRestaurant(rd.Id);
-            AddRestaurant(rd);
+            var restaurant = _workUnit.Restaurants.Get(rd.Id);
+
+            restaurant.Name = rd.Name;
+            restaurant.Address = rd.Address;
+            restaurant.Phone = rd.Phone;
+
+            _workUnit.SaveChanges();
         }
 
         public void UpdateReview(ReviewDisplay rd) {
-            DeleteReview(rd.Id);
-            AddReview(rd);
+            var review = _workUnit.Reviews.Get(rd.Id);
+
+            review.Name = rd.ReviewerName ?? "Anonymous";
+            review.Title = rd.Title;
+            review.Body = rd.Body;
+            review.Rating = rd.Rating;
+            review.DatePublished = DateTime.Now;
+
+            _workUnit.SaveChanges();
         }
 
         public void DeleteRestaurant(int restId) {

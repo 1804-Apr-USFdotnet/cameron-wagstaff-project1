@@ -59,7 +59,7 @@ namespace ReviewSiteLogic.Util {
             return new Review() {
                 Rating = r.Rating,
                 Body = r.Body,
-                Name = r.ReviewerName,
+                Name = r.ReviewerName ?? "Anonymous",
                 Title = r.Title,
                 Id = r.Id,
                 RestaurantId = r.RestaurantId,

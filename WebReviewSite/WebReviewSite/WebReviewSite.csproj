@@ -246,6 +246,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\EditReview.cshtml" />
     <Content Include="Views\Home\ManageRestaurant.cshtml" />
+    <Content Include="Views\Home\EditRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
