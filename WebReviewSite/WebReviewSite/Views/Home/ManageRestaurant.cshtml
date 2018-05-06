@@ -1,4 +1,5 @@
-﻿@model ReviewSiteLogic.Render.RestaurantDisplay
+﻿@using Antlr.Runtime.Tree
+@model ReviewSiteLogic.Render.RestaurantDisplay
 
 @{
     ViewBag.Title = "Manage Restaurant";
@@ -9,6 +10,9 @@
     <div class="d-flex">
         <div class="p-2 h2">
             Managing @Model.Name
+        </div>
+        <div class="p-2">
+            @Html.ActionLink("Back", "ViewRestaurant", new {id = Model.Id}, new {@class = "btn btn-secondary"})
         </div>
         <div class="p-2">
             @Html.ActionLink("Edit", "EditRestaurant", new {id = Model.Id}, new {@class = "btn btn-warning"})
@@ -60,7 +64,7 @@
                 <td>
                     @Html.ActionLink("Edit", "EditReview", new {id = item.Id}, new {@class = "btn btn-warning"})
                     <br/>
-                    @Html.ActionLink("Delete", "DeleteReview", new {id = item.Id}, new {@class = "btn btn-danger"})
+                    @Html.ActionLink("Delete", "DeleteReview", new {id = item.Id, restaurantId = Model.Id}, new {@class = "btn btn-danger"})
                 </td>
             </tr>
         }

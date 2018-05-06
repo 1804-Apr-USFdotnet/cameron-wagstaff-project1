@@ -104,6 +104,16 @@ namespace WebReviewSite.Controllers
         public ActionResult ManageRestaurant(int id) {
             return View(_session.ViewRestaurant(id));
         }
+
+        public ActionResult DeleteRestaurant(int id) {
+            _session.DeleteRestaurant(id);
+            return Redirect("/Home/ListRestaurants");
+        }
+
+        public ActionResult DeleteReview(int id, int restaurantId) {
+            _session.DeleteReview(id);
+            return Redirect($"/Home/ManageRestaurant/{restaurantId}");
+        }
         
         public ActionResult About()
         {
