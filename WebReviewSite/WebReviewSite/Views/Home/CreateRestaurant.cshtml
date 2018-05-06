@@ -1,7 +1,7 @@
 ﻿@model ReviewSiteLogic.Render.RestaurantDisplay
 
 @{
-    ViewBag.Title = "Create New Restaurant";
+    ViewBag.Title = "Creating Restaurant";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -48,7 +48,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "ListRestaurants", null, new {@class = "btn btn-secondary"})
+    @Html.ActionLink("Back", "ListRestaurants", null, new {@class = "btn btn-secondary"})
 </div>
 
 @section Scripts {
