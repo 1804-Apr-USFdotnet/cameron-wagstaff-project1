@@ -103,9 +103,6 @@ namespace ReviewSiteLogic {
         public void AddRestaurant(RestaurantDisplay rd) {
             try {
                 _workUnit.Restaurants.Add(dsp.ToModel(rd));
-                if (rd.Reviews != null) {
-                    _workUnit.Reviews.Add(dsp.ToModel(rd.Reviews));
-                }
                 _workUnit.SaveChanges();
             }
             catch (Exception e) {
@@ -124,25 +121,36 @@ namespace ReviewSiteLogic {
         }
 
         public void UpdateRestaurant(RestaurantDisplay rd) {
-            var restaurant = _workUnit.Restaurants.Get(rd.Id);
+            try {
+                var restaurant = _workUnit.Restaurants.Get(rd.Id);
 
-            restaurant.Name = rd.Name;
-            restaurant.Address = rd.Address;
-            restaurant.Phone = rd.Phone;
+                restaurant.Name = rd.Name;
+                restaurant.Address = rd.Address;
+                restaurant.Phone = rd.Phone;
 
-            _workUnit.SaveChanges();
+                _workUnit.SaveChanges();
+            }
+            catch (Exception e) {
+                logger.Error(e.Message);
+            }
         }
 
         public void UpdateReview(ReviewDisplay rd) {
-            var review = _workUnit.Reviews.Get(rd.Id);
+            try {
+                var review = _workUnit.Reviews.Get(rd.Id);
 
-            review.Name = rd.ReviewerName ?? "Anonymous";
-            review.Title = rd.Title;
-            review.Body = rd.Body;
-            review.Rating = rd.Rating;
-            review.DatePublished = DateTime.Now;
+                review.Name = rd.ReviewerName ?? "Anonymous";
+                review.Title = rd.Title;
+                review.Body = rd.Body;
+                review.Rating = rd.Rating;
+                review.DatePublished = DateTime.Now;
 
-            _workUnit.SaveChanges();
+                _workUnit.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                logger.Error(e.Message);
+            }
         }
 
         public void DeleteRestaurant(int restId) {

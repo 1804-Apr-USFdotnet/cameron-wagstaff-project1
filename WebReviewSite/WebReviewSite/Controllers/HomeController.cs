@@ -84,7 +84,7 @@ namespace WebReviewSite.Controllers
             if (ModelState.IsValid) {
                 _session.AddRestaurant(rd);
             }
-            return Redirect("/");
+            return Redirect("/Home/ListRestaurants");
         }
 
         [HttpGet]
@@ -93,6 +93,7 @@ namespace WebReviewSite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateReview(ReviewDisplay rd) {
             if (ModelState.IsValid) {
                 _session.AddReview(rd);
@@ -110,6 +111,7 @@ namespace WebReviewSite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditRestaurant(RestaurantDisplay rd) {
             if (ModelState.IsValid) {
                 _session.UpdateRestaurant(rd);
@@ -123,6 +125,7 @@ namespace WebReviewSite.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditReview(ReviewDisplay rd) {
             if (ModelState.IsValid) {
                 _session.UpdateReview(rd);

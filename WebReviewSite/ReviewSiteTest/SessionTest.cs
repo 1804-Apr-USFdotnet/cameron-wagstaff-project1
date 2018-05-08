@@ -47,10 +47,10 @@ namespace ReviewSiteTest {
             var reviewGuid = Guid.NewGuid().ToString();
             var now = DateTime.Now;
 
-            var rd = new ReviewDisplay(1, 1, "ReviewerName", "ReviewTitle", reviewGuid, 5, now);
+            var rd = new ReviewDisplay(1, 2, "ReviewerName", "ReviewTitle", reviewGuid, 5, now);
 
             session.AddReview(rd);
-            var result = session.ViewReviews(1).Single(r => r.Body == reviewGuid);
+            var result = session.ViewReviews(2).Single(r => r.Body == reviewGuid);
 
             session.DeleteReview(result.Id);
 
