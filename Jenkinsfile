@@ -5,7 +5,7 @@ node('master') {
     stage('build') {
         dir('WebReviewSite'){
             bat 'nuget restore'
-            bat 'msbuild'
+            bat 'msbuild /p:MvcBuildViews=true'
         }
     }
     stage('test') {
