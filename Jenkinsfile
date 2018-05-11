@@ -12,7 +12,11 @@ node('master') {
         bat "VSTest.Console WebReviewSite\\WebReviewSite.Tests\\bin\\Debug\\WebReviewSite.Tests.dll"
     }
     stage('analyze') {
-        
+        dir('WebReviewSite') {
+			bat 'SonarQube.Scanner.MSBuild begin /k:cameron-wagstaff-project1 /v:0.1.0'
+			bat 'msbuild /t:rebuild'
+			bat 'SonarQube.Scanner.MSBuild end'
+		}
     }
     stage('package') {
         dir('WebReviewSite') {
