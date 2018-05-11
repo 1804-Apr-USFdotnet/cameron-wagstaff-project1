@@ -13,9 +13,9 @@ node('master') {
     }
     stage('analyze') {
         dir('WebReviewSite') {
-			bat 'SonarQube.Scanner.MSBuild begin /k:cameron-wagstaff-project1 /v:0.1.0'
-			bat 'msbuild /t:rebuild'
-			bat 'SonarQube.Scanner.MSBuild end'
+			bat 'SonarQube.Scanner.MSBuild.exe begin /k:cameron-wagstaff-project1 /v:0.1.0'
+			bat 'msbuild WebReviewSite /t:rebuild'
+			bat 'SonarQube.Scanner.MSBuild.exe end'
 		}
     }
     stage('package') {
