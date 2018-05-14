@@ -13,9 +13,9 @@ node('master') {
     }
     stage('analyze') {
         dir('WebReviewSite') {
-			bat 'SonarQube.Scanner.MSBuild.exe begin /k:cameron-wagstaff-p1 /v:0.1.0'
-			bat 'msbuild WebReviewSite /t:rebuild'
-			bat 'SonarQube.Scanner.MSBuild.exe end'
+			bat "SonarQube.Scanner.MSBuild.exe begin /k:\"cameron-project1\" /d:sonar.organization=\"cameron-wags-github\" /d:sonar.login=\"project1\" /v:0.1.0"
+			bat 'msbuild WebReviewSite /t:Rebuild'
+			bat "SonarQube.Scanner.MSBuild.exe end /d:sonar.login=\"project1\""
 		}
     }
     stage('package') {
